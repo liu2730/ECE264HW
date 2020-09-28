@@ -32,6 +32,20 @@ void ssort(int * arr, int size)
   // The second level finds the smallest element among the unsorted
   // elements
 
+  int hold = 0;
+
+  for (int i = 0; i < size - 1; i++)
+  {
+    for(int j = i + 1; j < size; j++)
+    {
+      if(arr[i] > arr[j])
+      {
+        hold = arr[i];
+        arr[i] = arr[j];
+        arr[j] = hold;
+      }
+    }
+  }
   // This is the syntax to read or write an array element:
   // int x = arr[4];
   // read the value of arr[4] and store it in x
