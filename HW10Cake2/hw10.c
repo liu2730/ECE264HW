@@ -29,8 +29,27 @@ void printListNode(ListNode * head)
 // The first node (head) stores 0, the next node stores 1,
 // ..., the last node stores valn - 1
 // return the head of the linked listn
+ListNode * newNode(int v)
+{
+  ListNode * p = (ListNode*) malloc(sizeof(ListNode));
+  p->value = v;
+  p->next = NULL;
+  return p;
+}
+
 ListNode * createList(int valn)
 {
+  ListNode* head = newNode(0);
+  ListNode* temp = head;
+  ListNode* n;
+  for (int i = 1; i < valn; i++)
+  {
+    n = newNode(i);
+    temp->next = n;
+    temp = n; 
+  }
+  
+  return head;
 }
 #endif
 
@@ -43,14 +62,59 @@ ListNode * createList(int valn)
 // the list
 //
 // print the values of the nodes to be deleted
+int getCount(ListNode * head)
+{
+  if (head == NULL)
+  {
+    return 0;
+  }
+  return 1 + getCount(head->next);
+}
+
 void eliminate(ListNode * head, int valk)
 {
-#ifdef DEBUG
-  // this #ifdef ... #endif should be inside the condition *BEFORE* a
-  // node' value is printed and it is deleted
-  ListNode * todelete = p;
-  printListNode (todelete); 
-#endif
+  int counter = 0;
+  int n = getCount(head);
+  int j = 0;
+  ListNode * temp;
+  ListNode * todelete;
+
+  while (counter < (n - 1))
+  {
+    temp = head;
+    while(temp != NULL)
+    {
+      if(temp->value != 0)
+      {
+        temp->value = j;
+        j++;
+        if (j > valk)
+        {
+          temp -> value = 0;
+          counter++;
+          j = 1;
+        }
+      }
+      #ifdef DEBUG
+      // this #ifdef ... #endif should be inside the condition *BEFORE* a
+      // node' value is printed and it is deleted
+      todelete = temp;
+      printListNode (todelete); 
+      #endif
+      temp = temp->next;
+    }
+  }
+
+  temp = head;
+  while(temp != NULL)
+  {
+    if(temp->value != 0)
+    {
+      fprintf(stdout, "%d\n", temp->value);
+    }
+    temp = temp->next;
+  }
+
 }
 #endif
 
@@ -69,8 +133,41 @@ void eliminate(ListNode * head, int valk)
 //    return head
 // It is possible that todelete is the first node in the list (i.e.,
 // the head). If this occurs, return the second node of the list.
+bool nodeSearch(ListNode * head, int x)
+{
+  ListNode* current = head;
+  while (current != NULL)
+  {
+    if (current->value == x)
+    {
+      return true;
+    }
+    current = current->next;
+  }
+  return false;
+}
+
 ListNode * deleteNode(ListNode * head, ListNode * todelete)
 {
+  if (head == NULL)
+  {
+    return NULL;
+  }
+  if (todelete == NULL)
+  {
+    return head;
+  }
+  if (nodeSearch(head, todelete->value) == false)
+  {
+    return head;
+  }
+  if (head->value == todelete->value)
+  {
+    head = head->next;
+    return head;
+  }
+  free(todelete);
+  return head;
 }
 #endif
 
