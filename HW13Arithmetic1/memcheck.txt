@@ -1,0 +1,81 @@
+==29563== Memcheck, a memory error detector
+==29563== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29563== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==29563== Command: ./hw13 inputs/test2
+==29563== Parent PID: 29557
+==29563== 
+--29563-- 
+--29563-- Valgrind options:
+--29563--    --tool=memcheck
+--29563--    --log-file=memcheck.txt
+--29563--    --leak-check=full
+--29563--    --verbose
+--29563-- Contents of /proc/version:
+--29563--   Linux version 3.10.0-1127.8.2.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ) #1 SMP Tue May 12 16:57:42 UTC 2020
+--29563-- 
+--29563-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3
+--29563-- Page sizes: currently 4096, max supported 4096
+--29563-- Valgrind library directory: /usr/libexec/valgrind
+--29563-- Reading syms from /home/shay/a/liu2730/Desktop/ECE264HW/HW13Arithmetic1/hw13
+--29563-- Reading syms from /usr/lib64/ld-2.17.so
+--29563--   Considering /usr/lib/debug/usr/lib64/ld-2.17.so.debug ..
+--29563--   .. CRC mismatch (computed 3bbc9605 wanted f687b9f7)
+--29563-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--29563--    object doesn't have a symbol table
+--29563--    object doesn't have a dynamic symbol table
+--29563-- Scheduler: using generic scheduler lock implementation.
+--29563-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==29563== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-29563-by-liu2730-on-ecegrid-thin1.ecn.purdue.edu
+==29563== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-29563-by-liu2730-on-ecegrid-thin1.ecn.purdue.edu
+==29563== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-29563-by-liu2730-on-ecegrid-thin1.ecn.purdue.edu
+==29563== 
+==29563== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==29563== don't want to do, unless you know exactly what you're doing,
+==29563== or are doing some strange experiment):
+==29563==   /usr/libexec/valgrind/../../bin/vgdb --pid=29563 ...command...
+==29563== 
+==29563== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==29563==   /path/to/gdb ./hw13
+==29563== and then give GDB the following command
+==29563==   target remote | /usr/libexec/valgrind/../../bin/vgdb --pid=29563
+==29563== --pid is optional if only one valgrind process is running
+==29563== 
+--29563-- REDIR: 0x4019e40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c7ed5 (???)
+--29563-- REDIR: 0x4019c10 (ld-linux-x86-64.so.2:index) redirected to 0x580c7eef (???)
+--29563-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--29563-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==29563== WARNING: new redirection conflicts with existing -- ignoring it
+--29563--     old: 0x04019e40 (strlen              ) R-> (0000.0) 0x580c7ed5 ???
+--29563--     new: 0x04019e40 (strlen              ) R-> (2007.0) 0x04c2d1b0 strlen
+--29563-- REDIR: 0x4019dc0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c2e300 (strcmp)
+--29563-- REDIR: 0x401aa80 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c31f90 (mempcpy)
+--29563-- Reading syms from /usr/lib64/libc-2.17.so
+--29563--   Considering /usr/lib/debug/usr/lib64/libc-2.17.so.debug ..
+--29563--   .. CRC mismatch (computed b39ec7be wanted 3177c6f6)
+--29563-- REDIR: 0x4ec7130 (libc.so.6:strcasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4ec3eb0 (libc.so.6:strnlen) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4ec9400 (libc.so.6:strncasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4ec6910 (libc.so.6:memset) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4ec68c0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4ec58a0 (libc.so.6:__GI_strrchr) redirected to 0x4c2cb70 (__GI_strrchr)
+--29563-- REDIR: 0x4ebc6b0 (libc.so.6:malloc) redirected to 0x4c29eec (malloc)
+--29563-- REDIR: 0x4edc920 (libc.so.6:__GI_strstr) redirected to 0x4c32220 (__strstr_sse2)
+--29563-- REDIR: 0x4ec5fa0 (libc.so.6:memchr) redirected to 0x4c2e3a0 (memchr)
+--29563-- REDIR: 0x4ecbb40 (libc.so.6:__GI_memcpy) redirected to 0x4c2efb0 (__GI_memcpy)
+--29563-- REDIR: 0x4ec2270 (libc.so.6:index) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4f75d70 (libc.so.6:__strchr_sse42) redirected to 0x4c2cd60 (index)
+--29563-- REDIR: 0x4ec37c0 (libc.so.6:strcpy) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--29563-- REDIR: 0x4ed16e0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c2d1d0 (strcpy)
+--29563-- REDIR: 0x4ebcad0 (libc.so.6:free) redirected to 0x4c2afe6 (free)
+--29563-- REDIR: 0x4ec3dd0 (libc.so.6:__GI_strlen) redirected to 0x4c2d110 (__GI_strlen)
+--29563-- REDIR: 0x4ecd3c0 (libc.so.6:strchrnul) redirected to 0x4c31ab0 (strchrnul)
+--29563-- REDIR: 0x4ec6ae0 (libc.so.6:__GI_mempcpy) redirected to 0x4c31cc0 (__GI_mempcpy)
+--29563-- REDIR: 0x4ecd1b0 (libc.so.6:__GI___rawmemchr) redirected to 0x4c31b10 (__GI___rawmemchr)
+==29563== 
+==29563== HEAP SUMMARY:
+==29563==     in use at exit: 0 bytes in 0 blocks
+==29563==   total heap usage: 19 allocs, 19 frees, 1,128 bytes allocated
+==29563== 
+==29563== All heap blocks were freed -- no leaks are possible
+==29563== 
+==29563== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
