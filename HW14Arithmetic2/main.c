@@ -49,7 +49,7 @@ int main (int argc, char ** argv)
     {
       return EXIT_FAILURE;
     }
-  // printList(arithlist);
+  //printList(arithlist);
   convert(arithlist);
   printList(arithlist);
   deleteList(arithlist);
