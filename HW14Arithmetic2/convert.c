@@ -95,7 +95,7 @@ bool convert(List * arithlist)
           deleteNode(opList, opTemp);
           opTemp = opList->tail;
         }
-        if(((isOperator(temp->word) > isOperator(opTemp->word) && (isOperator(temp->word) != 1))|| (flag == 1))  && (isOperator(temp->word) != 4))
+        if(((isOperator(temp->word) > isOperator(opTemp->word) && (isOperator(temp->word) != 1)|| (flag == 1))  && (isOperator(temp->word) != 4))
         {
           addNode(opList, temp->word);
           opTemp = opList->tail;
