@@ -94,8 +94,18 @@ Tree * buildTree(int * inArray, int * postArray, int size)
 #endif
 
 #ifdef TEST_PRINTPATH
+int max(int num1, int num2)
+{
+  return(num1 > num2) ? num1 : num2;
+}
+
 bool hasPath(TreeNode* root, int path[], int val, int* ind)
 {
+  if(root == NULL)
+  {
+    return false;
+  }
+
   path[*ind] = root->value;
   (*ind)++;
 
@@ -114,22 +124,13 @@ bool hasPath(TreeNode* root, int path[], int val, int* ind)
   return false;
 }
 
-int treeHeightLeft(TreeNode* root)
+int treeHeight(TreeNode* root)
 {
   if (root == NULL)
   {
     return 0;
   }
-  return 1 + treeHeightLeft(root->left);
-}
-
-int treeHeightRight(TreeNode* root)
-{
-  if (root == NULL)
-  {
-    return 0;
-  }
-  return 1 + treeHeightRight(root->right);
+  return 1 + max(treeHeight(root->left), treeHeight(root->right));
 }
 
 void printPath(Tree * tr, int val)
@@ -137,14 +138,7 @@ void printPath(Tree * tr, int val)
 
   int index = 0;
   int size = 0;
-  if (treeHeightRight(tr->root) > treeHeightLeft(tr->root))
-  {
-    size = treeHeightRight(tr->root);
-  }
-  else
-  {
-    size = treeHeightLeft(tr->root);
-  }
+  size = treeHeight(tr->root);
   
   int* pathArr = malloc(sizeof(int) * size);
 
