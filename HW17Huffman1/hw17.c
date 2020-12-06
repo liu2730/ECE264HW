@@ -58,17 +58,18 @@ void deleteList(List * arithlist)
   return;
 }
 
-
-void addNode(List * arithlist, char * word)
+void addNode(List * arithlist, TreeNode * node)
 {
   if(arithlist == NULL)
   {
     return;
   }
+
   ListNode* temp = malloc(sizeof(ListNode));
-  strcpy(temp->word, word);
+  temp->tnode = node;
   temp->next = NULL;
   temp->prev = NULL;
+
   if(arithlist->head == NULL)
   {
     arithlist->head = temp;
@@ -93,7 +94,7 @@ bool deleteNode(List * arithlist, ListNode * ln)
   }
 
   ListNode* temp = arithlist->head;
-  while((temp != NULL) && (temp->word != ln->word))
+  while((temp != NULL) && ((temp->tnode)->value != (ln->tnode)->value))
   {
     temp = temp->next;
   }
@@ -142,7 +143,17 @@ bool deleteNode(List * arithlist, ListNode * ln)
 }
 #endif
 
-#ifdef TEST_READLIST
+#ifdef TEST_BUILDTREE
+TreeNode* newTnode(char word)
+{
+  TreeNode * node = malloc(sizeof(TreeNode));
+	node -> value = word;
+	node -> left = NULL;	
+ 	node -> right = NULL;	
+  node -> code = 1;
+  return node;
+}
+
 int numElem(char* filename)
 {
   FILE * fp = fopen(filename, "r");
@@ -161,7 +172,6 @@ int numElem(char* filename)
 
 bool readList(char * filename, List * arithlist)
 {
-  char str[WORDLENGTH];
 
   FILE * fp = fopen(filename, "r");
   if (fp == NULL)
@@ -173,21 +183,193 @@ bool readList(char * filename, List * arithlist)
     return false;
   }
 
-  int elemRead = 0;
+  int numEl = numElem(filename);
+  char* str = malloc(sizeof(char) * numEl);
 
-  while(elemRead < numElem(filename))
+  if(numEl != fread(str, sizeof(char), numElem(filename), fp))
   {
-    elemRead = elemRead + fread(str, sizeof(char), 1, fp);
-    addNode(arithlist, str);
+    return false;
   }
+
+  int i = 0;
   
+  while(i < numEl)
+  {
+    if(str[i] == '1')
+    {
+      i++;
+      addNode(arithlist, newTnode(str[i]));
+    }
+    if(str[i] == '0')
+    {
+      addNode(arithlist, newTnode(str[i]));
+    }
+    i++;
+  }
+  ListNode* temp = arithlist->head;
+  ListNode* combine1 = NULL;
+  ListNode* combine2 = NULL;
+  TreeNode* hold = NULL;
+  while(temp->next != NULL)
+  {
+    while((temp->tnode)->value != '0')
+    {
+      temp = temp->next;
+    }
+    combine2 = temp->prev;
+    combine1 = combine2->prev;
+    hold = combine2->tnode;
+    combine1->tnode = newTnode('\0');
+    (combine1->tnode)->right = combine2->tnode;
+    (combine1->tnode)->left = hold;
+    deleteNode(arithlist, combine2);
+    deleteNode(arithlist, temp);
+    temp = combine1;
+    combine2 = combine1;
+  }
+
+  if(((arithlist->head)->next != NULL) && ((arithlist->head)->prev != NULL))
+  {
+    return false;
+  }
+  if(((arithlist->head)->tnode)->value != '0')
+  {
+    return false;
+  }
 
   fclose(fp);
+  free(str);
   return true;
+}
+
+bool encodeTree(TreeNode* root, int level, int* maxlevel)
+{
+  if(root == NULL)
+  {
+    return false;
+  }
+
+  if(*maxlevel < level)
+  {
+    root->code = 0;
+    *maxlevel = level;
+  }
+
+  encodeTree(root->left, level + 1, maxlevel);
+  encodeTree(root->right, level + 1, maxlevel);
+
+  return true;
+}
+
+int totalPrint(TreeNode* tnode)
+{
+  if(tnode == NULL)
+  {
+    return 0;
+  }
+  if((tnode->left == NULL) && (tnode->right == NULL))
+  {
+    return 1;
+  }
+  else
+  {
+    return totalPrint(tnode->left) + totalPrint(tnode->right);
+  }
+}
+
+void chBook(TreeNode* tnode, char wantArr[], int * index)
+{
+  if(tnode == NULL)
+  {
+    return;
+  }
+  
+  if (tnode->left == NULL && tnode->right == NULL) 
+  { 
+    wantArr[*index] = tnode->value;
+    (*index)++;
+  } 
+  
+  if (tnode->left != NULL)
+  {
+    chBook(tnode->left, wantArr, index);
+  } 
+
+  if (tnode->right != NULL) 
+  {
+    chBook(tnode->right, wantArr, index);
+  }
+
 }
 #endif
 
+#ifdef TEST_PRINTPATH
+int max(int num1, int num2)
+{
+  return(num1 > num2) ? num1 : num2;
+}
 
-#ifdef TEST_BUILDTREE
+bool hasPath(TreeNode* root, int path[], char want, int* ind)
+{
+  if(root == NULL)
+  {
+    return false;
+  }
 
+  path[*ind] = root->code;
+  (*ind)++;
+
+  if(root->value == want)
+  {
+    return true;
+  }
+
+  if(hasPath(root->left, path, want, ind) || hasPath(root->right, path, want, ind))
+  {
+    return true;
+  }
+
+  (*ind)--;
+  path[*ind] = -1;
+  return false;
+}
+
+int treeHeight(TreeNode* root)
+{
+  if (root == NULL)
+  {
+    return 0;
+  }
+  return 1 + max(treeHeight(root->left), treeHeight(root->right));
+}
+
+void printPath(Tree * tr, char val)
+{
+
+  int index = 0;
+  int size = 0;
+  size = treeHeight(tr->root);
+  
+  int* pathArr = malloc(sizeof(int) * size);
+
+
+  for(int i=0; i<size; i++)
+  {
+    pathArr[i] = -1;
+  }
+
+  if (hasPath(tr->root, pathArr, val, &index))
+  {
+    for(index = size - 1; index >= 0; index--)
+    {
+      if(pathArr[index] != -1)
+      {
+        printf("%d", pathArr[index]);
+      }
+    }
+  }
+
+  free(pathArr);
+}
 #endif
+

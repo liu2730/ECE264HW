@@ -1,0 +1,213 @@
+==30918== Memcheck, a memory error detector
+==30918== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==30918== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==30918== Command: ./hw17 inputs/input1
+==30918== Parent PID: 30916
+==30918== 
+--30918-- 
+--30918-- Valgrind options:
+--30918--    --tool=memcheck
+--30918--    --log-file=vallog
+--30918--    --leak-check=full
+--30918--    --verbose
+--30918-- Contents of /proc/version:
+--30918--   Linux version 3.10.0-1127.8.2.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ) #1 SMP Tue May 12 16:57:42 UTC 2020
+--30918-- 
+--30918-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3
+--30918-- Page sizes: currently 4096, max supported 4096
+--30918-- Valgrind library directory: /usr/libexec/valgrind
+--30918-- Reading syms from /home/shay/a/liu2730/Desktop/ECE264HW/HW17Huffman1/hw17
+--30918-- Reading syms from /usr/lib64/ld-2.17.so
+--30918--   Considering /usr/lib/debug/usr/lib64/ld-2.17.so.debug ..
+--30918--   .. CRC mismatch (computed 3bbc9605 wanted f687b9f7)
+--30918-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--30918--    object doesn't have a symbol table
+--30918--    object doesn't have a dynamic symbol table
+--30918-- Scheduler: using generic scheduler lock implementation.
+--30918-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==30918== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-30918-by-liu2730-on-ecegrid-thin1.ecn.purdue.edu
+==30918== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-30918-by-liu2730-on-ecegrid-thin1.ecn.purdue.edu
+==30918== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-30918-by-liu2730-on-ecegrid-thin1.ecn.purdue.edu
+==30918== 
+==30918== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==30918== don't want to do, unless you know exactly what you're doing,
+==30918== or are doing some strange experiment):
+==30918==   /usr/libexec/valgrind/../../bin/vgdb --pid=30918 ...command...
+==30918== 
+==30918== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==30918==   /path/to/gdb ./hw17
+==30918== and then give GDB the following command
+==30918==   target remote | /usr/libexec/valgrind/../../bin/vgdb --pid=30918
+==30918== --pid is optional if only one valgrind process is running
+==30918== 
+--30918-- REDIR: 0x4019e40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c7ed5 (???)
+--30918-- REDIR: 0x4019c10 (ld-linux-x86-64.so.2:index) redirected to 0x580c7eef (???)
+--30918-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--30918-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==30918== WARNING: new redirection conflicts with existing -- ignoring it
+--30918--     old: 0x04019e40 (strlen              ) R-> (0000.0) 0x580c7ed5 ???
+--30918--     new: 0x04019e40 (strlen              ) R-> (2007.0) 0x04c2d1b0 strlen
+--30918-- REDIR: 0x4019dc0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c2e300 (strcmp)
+--30918-- REDIR: 0x401aa80 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c31f90 (mempcpy)
+--30918-- Reading syms from /usr/lib64/libc-2.17.so
+--30918--   Considering /usr/lib/debug/usr/lib64/libc-2.17.so.debug ..
+--30918--   .. CRC mismatch (computed b39ec7be wanted 3177c6f6)
+--30918-- REDIR: 0x4ec7130 (libc.so.6:strcasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--30918-- REDIR: 0x4ec3eb0 (libc.so.6:strnlen) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--30918-- REDIR: 0x4ec9400 (libc.so.6:strncasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--30918-- REDIR: 0x4ec6910 (libc.so.6:memset) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--30918-- REDIR: 0x4ec68c0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--30918-- REDIR: 0x4ec58a0 (libc.so.6:__GI_strrchr) redirected to 0x4c2cb70 (__GI_strrchr)
+--30918-- REDIR: 0x4ebc6b0 (libc.so.6:malloc) redirected to 0x4c29eec (malloc)
+--30918-- REDIR: 0x4edc920 (libc.so.6:__GI_strstr) redirected to 0x4c32220 (__strstr_sse2)
+--30918-- REDIR: 0x4ebcad0 (libc.so.6:free) redirected to 0x4c2afe6 (free)
+--30918-- REDIR: 0x4ecbb40 (libc.so.6:__GI_memcpy) redirected to 0x4c2efb0 (__GI_memcpy)
+==30918== Invalid read of size 8
+==30918==    at 0x400F18: readList (hw17.c:213)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x5205998 is 8 bytes inside a block of size 24 free'd
+==30918==    at 0x4C2B06D: free (vg_replace_malloc.c:540)
+==30918==    by 0x400C42: deleteNode (hw17.c:140)
+==30918==    by 0x400EF0: readList (hw17.c:225)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Block was alloc'd at
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400A2F: addNode (hw17.c:68)
+==30918==    by 0x400DF4: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== Invalid read of size 8
+==30918==    at 0x400E7F: readList (hw17.c:215)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x5205990 is 0 bytes inside a block of size 24 free'd
+==30918==    at 0x4C2B06D: free (vg_replace_malloc.c:540)
+==30918==    by 0x400C42: deleteNode (hw17.c:140)
+==30918==    by 0x400EF0: readList (hw17.c:225)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Block was alloc'd at
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400A2F: addNode (hw17.c:68)
+==30918==    by 0x400DF4: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== Invalid read of size 8
+==30918==    at 0x400E73: readList (hw17.c:217)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x5205998 is 8 bytes inside a block of size 24 free'd
+==30918==    at 0x4C2B06D: free (vg_replace_malloc.c:540)
+==30918==    by 0x400C42: deleteNode (hw17.c:140)
+==30918==    by 0x400EF0: readList (hw17.c:225)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Block was alloc'd at
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400A2F: addNode (hw17.c:68)
+==30918==    by 0x400DF4: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== Invalid write of size 8
+==30918==    at 0x400EBA: readList (hw17.c:222)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==30918== 
+==30918== 
+==30918== Process terminating with default action of signal 11 (SIGSEGV)
+==30918==  Access not within mapped region at address 0x0
+==30918==    at 0x400EBA: readList (hw17.c:222)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  If you believe this happened as a result of a stack
+==30918==  overflow in your program's main thread (unlikely but
+==30918==  possible), you can try to increase the size of the
+==30918==  main thread stack using the --main-stacksize= flag.
+==30918==  The main thread stack size used in this run was 8388608.
+==30918== 
+==30918== HEAP SUMMARY:
+==30918==     in use at exit: 1,082 bytes in 23 blocks
+==30918==   total heap usage: 35 allocs, 12 frees, 2,458 bytes allocated
+==30918== 
+==30918== Searching for pointers to 23 not-freed blocks
+==30918== Checked 78,432 bytes
+==30918== 
+==30918== 96 bytes in 4 blocks are definitely lost in loss record 10 of 13
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400C60: newTnode (hw17.c:149)
+==30918==    by 0x400DE2: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== 120 bytes in 5 blocks are definitely lost in loss record 11 of 13
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400C60: newTnode (hw17.c:149)
+==30918==    by 0x400E22: readList (hw17.c:205)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== 144 (96 direct, 48 indirect) bytes in 4 blocks are definitely lost in loss record 12 of 13
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400C60: newTnode (hw17.c:149)
+==30918==    by 0x400EB5: readList (hw17.c:222)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== LEAK SUMMARY:
+==30918==    definitely lost: 312 bytes in 13 blocks
+==30918==    indirectly lost: 48 bytes in 2 blocks
+==30918==      possibly lost: 0 bytes in 0 blocks
+==30918==    still reachable: 722 bytes in 8 blocks
+==30918==         suppressed: 0 bytes in 0 blocks
+==30918== Reachable blocks (those to which a pointer was found) are not shown.
+==30918== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==30918== 
+==30918== ERROR SUMMARY: 13 errors from 7 contexts (suppressed: 0 from 0)
+==30918== 
+==30918== 1 errors in context 1 of 7:
+==30918== Invalid write of size 8
+==30918==    at 0x400EBA: readList (hw17.c:222)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==30918== 
+==30918== 
+==30918== 3 errors in context 2 of 7:
+==30918== Invalid read of size 8
+==30918==    at 0x400E73: readList (hw17.c:217)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x5205998 is 8 bytes inside a block of size 24 free'd
+==30918==    at 0x4C2B06D: free (vg_replace_malloc.c:540)
+==30918==    by 0x400C42: deleteNode (hw17.c:140)
+==30918==    by 0x400EF0: readList (hw17.c:225)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Block was alloc'd at
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400A2F: addNode (hw17.c:68)
+==30918==    by 0x400DF4: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== 
+==30918== 3 errors in context 3 of 7:
+==30918== Invalid read of size 8
+==30918==    at 0x400E7F: readList (hw17.c:215)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x5205990 is 0 bytes inside a block of size 24 free'd
+==30918==    at 0x4C2B06D: free (vg_replace_malloc.c:540)
+==30918==    by 0x400C42: deleteNode (hw17.c:140)
+==30918==    by 0x400EF0: readList (hw17.c:225)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Block was alloc'd at
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400A2F: addNode (hw17.c:68)
+==30918==    by 0x400DF4: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== 
+==30918== 3 errors in context 4 of 7:
+==30918== Invalid read of size 8
+==30918==    at 0x400F18: readList (hw17.c:213)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Address 0x5205998 is 8 bytes inside a block of size 24 free'd
+==30918==    at 0x4C2B06D: free (vg_replace_malloc.c:540)
+==30918==    by 0x400C42: deleteNode (hw17.c:140)
+==30918==    by 0x400EF0: readList (hw17.c:225)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918==  Block was alloc'd at
+==30918==    at 0x4C29F73: malloc (vg_replace_malloc.c:309)
+==30918==    by 0x400A2F: addNode (hw17.c:68)
+==30918==    by 0x400DF4: readList (hw17.c:201)
+==30918==    by 0x4007DA: main (main.c:24)
+==30918== 
+==30918== ERROR SUMMARY: 13 errors from 7 contexts (suppressed: 0 from 0)
