@@ -218,10 +218,13 @@ bool readList(char * filename, List * arithlist)
     }
     combine2 = temp->prev;
     combine1 = combine2->prev;
-    hold = combine2->tnode;
+    hold = combine1->tnode;
     combine1->tnode = newTnode('\0');
     (combine1->tnode)->right = combine2->tnode;
     (combine1->tnode)->left = hold;
+    combine2->tnode = NULL;
+    deleteTreeNode(temp->tnode);
+    temp->tnode = NULL;
     deleteNode(arithlist, combine2);
     deleteNode(arithlist, temp);
     temp = combine1;

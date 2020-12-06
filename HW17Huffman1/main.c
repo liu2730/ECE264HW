@@ -40,8 +40,7 @@ int main (int argc, char * * argv)
   char * chWant = malloc(sizeof(char) * numElem);
   chBook(compressTree->root, chWant, &index);
 
-  index = 0;
-  //for(index; index < numElem; index++)
+  for(index = 0; index < numElem; index++)
   {
     printf("%c %d ", chWant[index], chWant[index]);
     printPath(compressTree, chWant[index]);
